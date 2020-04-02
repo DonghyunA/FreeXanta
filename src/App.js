@@ -9,15 +9,19 @@ import TimerView from "./components/TimerView/TimerView";
 import GestureView from "./components/GestureView/GestureView";
 import SettingsView from "./components/SettingsView/SettingsView";
 import MouseView from "./components/MouseView/MouseView";
+import ClickView from "./components/ClickView/ClickView";
 import {Row, Col, Container} from "reactstrap";
 
 import {VIEW_SETTINGS, VIEW_CONNECT, VIEW_GESTURE, VIEW_CLICK, VIEW_MOUSE} from "./components/Define/Define";
 import {SET_MODE, SET_IP, SET_MAIN, SET_TIMER} from "./components/Define/Define";
 import {VALUE_GESTURE, VALUE_CLICK, VALUE_MOUSE} from "./components/Define/Define";
 
+import {BrowserRouter, Route} from 'react-router-dom';
+
 import "./App.css";
 import 'prevent-pull-refresh';
 import ip from 'ip';
+import Conneted from "./components/TopBar/Conneted";
 
 class App extends Component {
 
@@ -306,8 +310,36 @@ class App extends Component {
 			onDisconnect: this.onDisconnect
 		};
 
+		console.log(this.props);
+
 		return (
 			<div className="App">
+
+				<BrowserRouter>
+					<TopBar mode={this.state.mode} onChangeMode={this.onChangeMode} connected={this.state.connected} connFunc={connFunc} {...this.props} />
+					<Route path="/setting" render={() => <SettingsView settingValue={settingValue} settingFunc={settingFunc} />} />
+					<Route path={"/do"} render={() =>
+						<>
+							<Conneted connected={this.state.connected} />
+							<TimerView
+								setting_initialTime={this.state.setting_initialTime}
+								setting_timerDirection={this.state.setting_timerDirection}
+							/>
+						</>
+					}/>
+					<Route path={"/do/gesture"} render={() =>
+						<GestureView cmdFunc={cmdFunc}/>
+					}/>
+					<Route path={"/do/click"} render={() =>
+						<ClickView cmdFunc={cmdFunc}/>
+					}/>
+					<Route path={"/do/mouse"} render={() =>
+						<MouseView cmdFunc={cmdFunc} />
+					}/>
+				</BrowserRouter>
+
+
+				{/*
 				<TopBar mode={this.state.mode} onChangeMode={this.onChangeMode} connected={this.state.connected} connFunc={connFunc}/>
 				{this.state.mode === VIEW_SETTINGS &&
 					<SettingsView settingValue={settingValue} settingFunc={settingFunc}/>
@@ -324,7 +356,7 @@ class App extends Component {
 				{this.state.mode === VIEW_MOUSE &&
 					<MouseView cmdFunc={cmdFunc} />
 				}
-
+				*/}
 				{/*<Container>*/}
 				{/*<Row>*/}
 				{/*	<ConnectBtn*/}

@@ -23,6 +23,9 @@ import IPAddress from "./IPAddress";
 import { SET_MODE, SET_IP, SET_MAIN, SET_TIMER} from "../Define/Define";
 
 const SettingMenu = (props) => {
+
+	console.log("SettingMenu");
+	console.log("props", props);
 	const {listView, setViewList} = props;
 
 	return (
@@ -46,6 +49,7 @@ const SettingMenu = (props) => {
 const SettingsView = (props) => {
 	const {settingValue, settingFunc, connFunc} = props;
 
+	console.log("props", props);
 	console.log("settingValue", settingValue);
 	console.log("settingsFunc", settingFunc);
 	const {
@@ -89,6 +93,7 @@ const SettingsView = (props) => {
 
 	return(
 		<Container style={{position: "relative", top: "5%"}}>
+
 			<div
 				onClick={() => OnBack()}
 				style={{height: "6vh", fontSize: "1.5rem", display: "flex", alignItems: "center", backgroundColor: "darkgray", borderRadius: ".30rem"}}

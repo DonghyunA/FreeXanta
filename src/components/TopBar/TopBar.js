@@ -4,6 +4,8 @@ import { FaHandPointUp, FaCircle } from "react-icons/fa";
 import { MdSettings, MdMouse, MdTouchApp, MdGamepad } from "react-icons/md";
 import { Row, Container } from "reactstrap";
 import {VIEW_SETTINGS, VIEW_CONNECT, VIEW_GESTURE, VIEW_CLICK, VIEW_MOUSE} from "../Define/Define";
+import {BrowserRouter, Link, withRouter} from "react-router-dom";
+import styled from 'styled-components';
 
 const topBarStyle = {
 	top: "1vh",
@@ -24,6 +26,10 @@ const connectBtnStyle = {
 	position: "absolute",
 	left: "28%",
 	transform: "translate(-28%, 0%)",
+	color: "#007bff",
+	hover: {
+		color: "#0056B3"
+	}
 };
 const touchPadBtnStyle = {
 	position: "absolute",
@@ -71,6 +77,33 @@ const TobBar = (props) => {
 	return (
 		<Container>
 			<Row className="justify-content-center" style={topBarStyle} >
+				<Link to="/setting">
+					<MdSettings	style={settingBtnStyle}	size={iconStyle}/>
+				</Link>
+				{connected
+					? <FiWifiOff
+						color={"#007bff"}
+						onMouseOver={(e) => e.target.style.color = '#0056B3'}
+						onMouseLeave={(e) => e.target.style.color = '#007bff'}
+						onClick={() => connFunc.onDisconnect()}
+						style={connectBtnStyle}
+						size={iconStyle}/>
+					: <FiWifi
+							onClick={() => connFunc.onConnect()}
+							style={connectBtnStyle}
+							size={iconStyle} />
+				}
+				<Link to="/do/gesture">
+					<MdTouchApp style={touchPadBtnStyle}  size={iconStyle} />
+				</Link>
+				<Link to="/do/click">
+					<MdGamepad style={keyPadBtnStyle}  size={iconStyle} />
+				</Link>
+				<Link to="/do/mouse">
+					<MdMouse style={mousePadBtnStyle}  size={iconStyle} />
+				</Link>
+
+				{/*
 				<MdSettings onClick={() => onChangeMode(VIEW_SETTINGS)} style={settingBtnStyle} size={iconStyle}/>
 				{connected
 					? <FiWifiOff onClick={() => connFunc.onDisconnect()} style={connectBtnStyle} size={iconStyle}/>
@@ -79,7 +112,11 @@ const TobBar = (props) => {
 				<MdTouchApp onClick={() => onChangeMode(VIEW_GESTURE)} style={touchPadBtnStyle}  size={iconStyle} />
 				<MdGamepad onClick={() => onChangeMode(VIEW_CLICK)} style={keyPadBtnStyle}  size={iconStyle} />
 				<MdMouse onClick={() => onChangeMode(VIEW_MOUSE)} style={mousePadBtnStyle}  size={iconStyle} />
+				*/}
+
+
 			</Row>
+			{/*
 			{mode !== VIEW_SETTINGS && true &&
 				<div style={connectCircleStyle}>
 					<FaCircle color={color}/>
@@ -87,6 +124,7 @@ const TobBar = (props) => {
 					<div>{connMsg}</div>
 				</div>
 			}
+			*/}
 		</Container>
 	);
 };
