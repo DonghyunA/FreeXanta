@@ -64,8 +64,9 @@ class ClickView extends Component {
     constructor(props){
         super(props);
         this.state = {
-            isOpen: false,
             isChecked: false,
+            isBlackOut: false,
+            isWholeScreen: false,
             childButtons: []
         };
 
@@ -149,11 +150,17 @@ class ClickView extends Component {
             switch(index) {
                 case 0: // stop
                     console.log("stop");
-                    this.props.cmdFunc.onBlackScreenCMD(Define.CMD_SHOW);
+                    (this.state.isBlackOut == false)
+                      ? this.props.cmdFunc.onBlackScreenCMD(Define.CMD_SHOW)
+                        : this.props.cmdFunc.onBlackScreenCMD(Define.CMD_HIDE);
+                    this.setState({isBlackOut: !this.state.isBlackOut});
                     break;
                 case 1: // Pause
                     console.log("play");
-                    this.props.cmdFunc.onBlackScreenCMD(Define.CMD_HIDE);
+                    (this.state.isWholeScreen == false)
+                        ? this.props.cmdFunc.onSendKeyCMD(Define.CMD_F5)
+                        : this.props.cmdFunc.onSendKeyCMD(Define.CMD_ESC);
+                    this.setState({isWholeScreen: !this.state.isWholeScreen});
                     break;
                 case 2: // backward
                     console.log("backward");
