@@ -149,19 +149,19 @@ class ClickView extends Component {
             switch(index) {
                 case 0: // stop
                     console.log("stop");
-                    this.props.cmdFunc.onSendKeyCMD(Define.CMD_HIDE);
+                    this.props.cmdFunc.onBlackScreenCMD(Define.CMD_SHOW);
                     break;
                 case 1: // Pause
                     console.log("play");
-                    this.props.cmdFunc.onSendKeyCMD(Define.CMD_SHOW);
+                    this.props.cmdFunc.onBlackScreenCMD(Define.CMD_HIDE);
                     break;
                 case 2: // backward
                     console.log("backward");
-                    this.props.cmdFunc.onSendKeyCMD(Define.CMD_PGDN);
+                    this.props.cmdFunc.onSendKeyCMD(Define.CMD_PGUP);
                     break;
                 case 3: // forward
                     console.log("forward");
-                    this.props.cmdFunc.onSendKeyCMD(Define.CMD_PGUP);
+                    this.props.cmdFunc.onSendKeyCMD(Define.CMD_PGDN);
                     break;
                 case 4: // home
                     console.log("home");
