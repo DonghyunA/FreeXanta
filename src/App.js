@@ -9,6 +9,7 @@ import TimerView from "./components/TimerView/TimerView";
 import GestureView from "./components/GestureView/GestureView";
 import SettingsView from "./components/SettingsView/SettingsView";
 import MouseView from "./components/MouseView/MouseView";
+import ClickView from "./components/ClickView/ClickView";
 import {Row, Col, Container} from "reactstrap";
 
 import {VIEW_SETTINGS, VIEW_CONNECT, VIEW_GESTURE, VIEW_CLICK, VIEW_MOUSE} from "./components/Define/Define";
@@ -197,15 +198,23 @@ class App extends Component {
 	};
 
 	onMouseCursorMove = (e) => {
+		var dx = e.event.changedTouches[0].pageX - this.state.mouse_x;
+		var dy = e.event.changedTouches[0].pageY - this.state.mouse_y;
 		this.setState({
 			...this.state,
-			mouse_x: e.deltaX,
-			mouse_y: e.deltaY
+			mouse_x: e.event.changedTouches[0].pageX,
+			mouse_y: e.event.changedTouches[0].pageY
 		});
-		const onCMD = '{"type":"request","cmd":"mouse", "subcmd":"move", "data":{"dx":'+e.deltaX*-0.1 +', "dy":'+e.deltaY*-0.1 +', "x":'+e.pageX+',"y":'+e.pageY+'} }';
+		if(e.first){
+			return
+		}
+		const onCMD = '{"type":"request","cmd":"mouse", "subcmd":"move", "data":{"dx":'+dx +', "dy":'+dy +', "x":'+0+',"y":'+0+'} }';
+		//const onCMD = '{"type":"request","cmd":"mouse", "subcmd":"move", "data":{"dx":'+dx +', "dy":'+dy +', "x":'+this.state.mouse_x+',"y":'+this.state.mouse_y+'} }';
+		console.log("dx : " + dx + ", dy : " + dy);
+		// const onCMD = '{"type":"request","cmd":"mouse", "subcmd":"move", "data":{"dx":'+e.deltaX*-0.2 +', "dy":'+e.deltaY*-0.2 +', "x":'+e.pageX+',"y":'+e.pageY+'} }';
+		//console.log("dx : " + e.deltaX*-0.2 + ", dy : " + e.deltaY*-0.2);
 		this.onSend(onCMD);
 	};
-
 
 	onNext = () => {
 		//const str = '{"type":"request", "cmd":"keyboard", "subcmd":"stroke-t1", "data": "{DOWN}"}';
@@ -317,6 +326,9 @@ class App extends Component {
 						setting_initialTime={this.state.setting_initialTime}
 						setting_timerDirection={this.state.setting_timerDirection}
 					/>
+				}
+				{this.state.mode === VIEW_CLICK &&
+					<ClickView cmdFunc={cmdFunc}/>
 				}
 				{this.state.mode === VIEW_GESTURE &&
 					<GestureView cmdFunc={cmdFunc}/>

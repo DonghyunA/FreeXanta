@@ -12,6 +12,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "bootstrap": "^4.4.1",
+    "font-awesome": "^4.7.0",
     "ip": "^1.1.5",
     "prevent-pull-refresh": "^1.0.5",
     "react": "^16.13.1",
@@ -20,6 +21,7 @@
     "react-dom": "^16.13.1",
     "react-icons": "^3.9.0",
     "react-input-mask": "^2.0.4",
+    "react-motion": "^0.5.2",
     "react-scripts": "3.4.0",
     "react-simple-timefield": "^3.0.0",
     "react-swipeable": "^5.5.1",
@@ -70,6 +72,7 @@
     "webpack-dev-server": "^3.10.3",
     "webpack-pwa-manifest": "^4.2.0",
     "workbox-cli": "^5.1.2",
-    "workbox-webpack-plugin": "^5.1.2"
+    "workbox-webpack-plugin": "^5.1.2",
+    "lodash.range": "^3.2.0"
   }
 }
