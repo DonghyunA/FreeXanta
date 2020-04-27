@@ -16,7 +16,7 @@ const CHILD_BUTTON_DIAM = 48;
 const NUM_CHILDREN = 5;
 // Hard code the position values of the mainButton
 
-const M_Y = 150;
+const M_Y = 200;
 
 const SPRING_CONFIG = [400, 28];
 
@@ -29,7 +29,8 @@ const FLY_OUT_RADIUS = 130,
 
 // Names of icons for each button retreived from fontAwesome, we'll add a little extra just in case
 // the NUM_CHILDREN is changed to a bigger value
-let childButtonIcons = ['play', 'pause', 'backward', 'forward', 'stop'];
+//let childButtonIcons = ['play', 'pause', 'backward', 'forward', 'stop'];
+let childButtonIcons = ['stop', 'play', 'backward', 'forward', 'home'];
 
 function toRadians(degrees) {
     return degrees * 0.0174533;
@@ -44,9 +45,9 @@ function getXPosition(isRight) {
 function getMainCircleColor(isRight) {
     if(isRight)
     {
-        return "#f90";
+        return "#1a202c";
     }
-    return "green";
+    return "#8898A5";
 }
 
 function finalChildDeltaPositions(index, isRight) {
@@ -143,26 +144,28 @@ class ClickView extends Component {
         if(this.state.isOpen)
         {
             /*let childButtonIcons = ['play', 'pause', 'backward', 'forward', 'stop']*/
+            //let childButtonIcons = ['stop', 'play', 'backward', 'forward', 'home'];
+
             switch(index) {
-                case 0: // play
-                    console.log("play");
-                    alert("play");
+                case 0: // stop
+                    console.log("stop");
+                    this.props.cmdFunc.onSendKeyCMD(Define.CMD_HIDE);
                     break;
                 case 1: // Pause
-                    console.log("Pause");
-                    alert("Pause");
+                    console.log("play");
+                    this.props.cmdFunc.onSendKeyCMD(Define.CMD_SHOW);
                     break;
                 case 2: // backward
                     console.log("backward");
-                    alert("backward");
+                    this.props.cmdFunc.onSendKeyCMD(Define.CMD_PGDN);
                     break;
                 case 3: // forward
                     console.log("forward");
-                    alert("forward");
+                    this.props.cmdFunc.onSendKeyCMD(Define.CMD_PGUP);
                     break;
-                case 4: // stop
-                    console.log("stop");
-                    alert("stop");
+                case 4: // home
+                    console.log("home");
+                    this.props.cmdFunc.onSendKeyCMD(Define.CMD_HOME);
                     break;
                 default:
                     console.log("index" + index);

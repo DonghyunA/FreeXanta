@@ -44,7 +44,7 @@
     content: "RIGHT";
     text-transform: uppercase;
     padding-left: 7px;
-    background-color: #f90;
+    background-color: #1a202c;
     color: #fff;
 }
 .toggle-switch-disabled {
@@ -59,7 +59,7 @@
     content: "LEFT";
     text-transform: uppercase;
     padding-right: 10px;
-    background-color: green;
+    background-color: #718096;
     color: #fff;
     text-align: right;
 }
@@ -92,7 +92,7 @@ html, body {
     width: 90px;
     height: 90px;
     border-radius: 100%;
-    background-color: green;
+    background-color: #718096;
     cursor: pointer;
     justify-content : center;
     align-items: center;
